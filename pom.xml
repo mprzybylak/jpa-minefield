@@ -13,4 +13,60 @@
 	<modules>
 		<module>id-generation</module>
 	</modules>
+	
+	<properties>
+		<eclipselink.version>2.5.1</eclipselink.version>
+		<derby.version>10.10.1.1</derby.version>
+		<junit.version>4.11</junit.version>
+		<fest.version>1.4</fest.version>
+	</properties>
+	
+	<dependencyManagement>
+		<dependencies>
+		
+			<!-- JPA Providers -->
+			<dependency>
+				<groupId>org.eclipse.persistence</groupId>
+				<artifactId>eclipselink</artifactId>
+				<version>${eclipselink.version}</version>
+			</dependency>
+			
+			<!-- Databases -->
+			<dependency>
+				<groupId>org.apache.derby</groupId>
+				<artifactId>derby</artifactId>
+				<version>${derby.version}</version>
+			</dependency>
+			
+			<!-- Unit testing -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.easytesting</groupId>
+				<artifactId>fest-assert</artifactId>
+				<version>${fest.version}</version>
+				<scope>test</scope>
+			</dependency>
+		
+		</dependencies>
+	</dependencyManagement>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>	
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
 </project>
