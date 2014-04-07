@@ -4,13 +4,21 @@
 	
 	<modelVersion>4.0.0</modelVersion>
 	
-	<groupId>com.mprzybylak.minefields</groupId>
-	<artifactId>jpa</artifactId>
+	<groupId>com.mprzybylak.minefields.jpa</groupId>
+	<artifactId>id-generation</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>JPA Minefield</name>
 	
+	<parent>
+		<groupId>com.mprzybylak.minefields</groupId>
+		<artifactId>jpa</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	
 	<modules>
-		<module>id-generation</module>
+		<module>eclipselink-jsr338</module>
 	</modules>
+	
 </project>
+ 
