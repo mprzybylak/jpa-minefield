@@ -6,6 +6,7 @@
 	<persistence-unit name="pu" transaction-type="RESOURCE_LOCAL">
 	
 		<class>com.mprzybylak.minefields.jpa.id.AutoGenerationEntity</class>
+		<class>com.mprzybylak.minefields.jpa.id.TableGenerationEntity</class>
 	
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
