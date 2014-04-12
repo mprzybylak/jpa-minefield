@@ -16,9 +16,10 @@ import org.junit.Test;
 
 import com.mprzybylak.minefields.jpa.id.common.QueryGenerator;
 
-public class SequenceGenerationEntityTest {
+public class IdentityGenerationEntityTest {
+
 	
-	private static final String SELECT_QUERY = QueryGenerator.select(SequenceGenerationEntity.class);
+	private static final String SELECT_QUERY = QueryGenerator.select(IdentityGenerationEntity.class);
 	private static final String TEXT = "Sample Text";
 	
 	private static EntityManagerFactory emf;
@@ -40,7 +41,7 @@ public class SequenceGenerationEntityTest {
 	public void shouldGenerateEntityId() {
 
 		// given
-		SequenceGenerationEntity entity = new SequenceGenerationEntity();
+		IdentityGenerationEntity entity = new IdentityGenerationEntity();
 		entity.setText(TEXT);
 		
 		// when
@@ -49,8 +50,8 @@ public class SequenceGenerationEntityTest {
 		em.persist(entity);
 		em.getTransaction().commit();
 
-		TypedQuery<SequenceGenerationEntity> query = em.createQuery(SELECT_QUERY, SequenceGenerationEntity.class);
-		SequenceGenerationEntity queryResult = query.getSingleResult(); 
+		TypedQuery<IdentityGenerationEntity> query = em.createQuery(SELECT_QUERY, IdentityGenerationEntity.class);
+		IdentityGenerationEntity queryResult = query.getSingleResult(); 
 		
 		// then
 		assertThat(oldId).isEqualTo(0); 
@@ -58,27 +59,26 @@ public class SequenceGenerationEntityTest {
 		assertThat(queryResult.getText()).isEqualTo(entity.getText());
 	}
 	
-	
 	@Test
 	public void shouldGenerateManyEntityIds() {
 
 		// given
-		Collection<SequenceGenerationEntity> entities = new ArrayList<SequenceGenerationEntity>(100);
+		Collection<IdentityGenerationEntity> entities = new ArrayList<IdentityGenerationEntity>(100);
 		for(int i = 0; i < 150; ++i) {
-			SequenceGenerationEntity entity = new SequenceGenerationEntity();
+			IdentityGenerationEntity entity = new IdentityGenerationEntity();
 			entity.setText(TEXT);
 			entities.add(entity);
 		}
 		
 		// when
 		em.getTransaction().begin();
-		for(SequenceGenerationEntity entityToPersist : entities) {
+		for(IdentityGenerationEntity entityToPersist : entities) {
 			em.persist(entityToPersist);
 		}
 		em.getTransaction().commit();
 		
 		// then
-		for(SequenceGenerationEntity persistedEntity : entities) {
+		for(IdentityGenerationEntity persistedEntity : entities) {
 			assertThat(persistedEntity.getId()).isNotEqualTo(0);
 			assertThat(persistedEntity.getText()).isEqualTo(TEXT);
 		}

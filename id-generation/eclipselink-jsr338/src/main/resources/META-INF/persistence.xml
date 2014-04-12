@@ -8,6 +8,7 @@
 		<class>com.mprzybylak.minefields.jpa.id.AutoGenerationEntity</class>
 		<class>com.mprzybylak.minefields.jpa.id.TableGenerationEntity</class>
 		<class>com.mprzybylak.minefields.jpa.id.SequenceGenerationEntity</class>
+		<class>com.mprzybylak.minefields.jpa.id.IdentityGenerationEntity</class>
 	
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
