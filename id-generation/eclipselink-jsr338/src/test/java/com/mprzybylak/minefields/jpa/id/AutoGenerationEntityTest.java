@@ -2,6 +2,9 @@ package com.mprzybylak.minefields.jpa.id;
 
 import static org.fest.assertions.Assertions.assertThat;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -50,6 +53,30 @@ public class AutoGenerationEntityTest {
 		assertThat(oldId).isEqualTo(0);
 		assertThat(queryResult.getId()).isNotEqualTo(0);
 		assertThat(queryResult.getText()).isEqualTo(entity.getText());
+	}
+	
+	@Test
+	public void shouldGenerateManyEntityIds() {
+
+		// given
+		Collection<AutoGenerationEntity> entities = new ArrayList<AutoGenerationEntity>(100);
+		for(int i = 0; i < 100; ++i) {
+			AutoGenerationEntity entity = new AutoGenerationEntity();
+			entity.setText(TEXT);
+			entities.add(entity);
+		}
+		
+		// when
+		for(AutoGenerationEntity entityToPersist : entities) {
+			em.getTransaction().begin();
+			em.persist(entityToPersist);
+			em.getTransaction().commit();
+		}
+		
+		// then
+		for(AutoGenerationEntity persistedEntity : entities) {
+			assertThat(persistedEntity.getId()).isNotEqualTo(0);
+		}
 	}
 	
 }
