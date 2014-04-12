@@ -16,20 +16,20 @@ import org.junit.Test;
 
 import com.mprzybylak.minefields.jpa.id.common.QueryGenerator;
 
-public class AutoGenerationEntityTest {
-
-	private static final String SELECT_QUERY = QueryGenerator.select(AutoGenerationEntity.class);
+public class SequenceGenerationEntityTest {
+	
+	private static final String SELECT_QUERY = QueryGenerator.select(SequenceGenerationEntity.class);
 	private static final String TEXT = "Sample Text";
 	
 	private static EntityManagerFactory emf;
 	private static EntityManager em;
-
+	
 	@BeforeClass
 	public static void setUpOnce() {
 		emf = Persistence.createEntityManagerFactory("pu");
 		em = emf.createEntityManager();
 	}
-	
+
 	@AfterClass
 	public static void tearDownOnce() {
 		em.close();
@@ -40,7 +40,7 @@ public class AutoGenerationEntityTest {
 	public void shouldGenerateEntityId() {
 
 		// given
-		AutoGenerationEntity entity = new AutoGenerationEntity();
+		SequenceGenerationEntity entity = new SequenceGenerationEntity();
 		entity.setText(TEXT);
 		
 		// when
@@ -49,38 +49,40 @@ public class AutoGenerationEntityTest {
 		em.persist(entity);
 		em.getTransaction().commit();
 
-		TypedQuery<AutoGenerationEntity> query = em.createQuery(SELECT_QUERY, AutoGenerationEntity.class);
-		AutoGenerationEntity queryResult = query.getSingleResult(); 
+		TypedQuery<SequenceGenerationEntity> query = em.createQuery(SELECT_QUERY, SequenceGenerationEntity.class);
+		SequenceGenerationEntity queryResult = query.getSingleResult(); 
 		
 		// then
-		assertThat(oldId).isEqualTo(0);
+		assertThat(oldId).isEqualTo(0); 
 		assertThat(queryResult.getId()).isNotEqualTo(0);
 		assertThat(queryResult.getText()).isEqualTo(entity.getText());
 	}
+	
 	
 	@Test
 	public void shouldGenerateManyEntityIds() {
 
 		// given
-		Collection<AutoGenerationEntity> entities = new ArrayList<AutoGenerationEntity>(100);
-		for(int i = 0; i < 100; ++i) {
-			AutoGenerationEntity entity = new AutoGenerationEntity();
+		Collection<SequenceGenerationEntity> entities = new ArrayList<SequenceGenerationEntity>(100);
+		for(int i = 0; i < 150; ++i) {
+			SequenceGenerationEntity entity = new SequenceGenerationEntity();
 			entity.setText(TEXT);
 			entities.add(entity);
 		}
 		
 		// when
 		em.getTransaction().begin();
-		for(AutoGenerationEntity entityToPersist : entities) {
+		for(SequenceGenerationEntity entityToPersist : entities) {
 			em.persist(entityToPersist);
 		}
 		em.getTransaction().commit();
 		
 		// then
-		for(AutoGenerationEntity persistedEntity : entities) {
+		for(SequenceGenerationEntity persistedEntity : entities) {
 			assertThat(persistedEntity.getId()).isNotEqualTo(0);
 			assertThat(persistedEntity.getText()).isEqualTo(TEXT);
 		}
 	}
+	
 	
 }

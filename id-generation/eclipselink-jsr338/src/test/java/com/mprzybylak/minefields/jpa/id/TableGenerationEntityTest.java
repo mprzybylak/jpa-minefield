@@ -14,9 +14,11 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.mprzybylak.minefields.jpa.id.common.QueryGenerator;
+
 public class TableGenerationEntityTest {
 	
-	private static final String SELECT_QUERY = "SELECT e FROM TableGenerationEntity e";
+	private static final String SELECT_QUERY = QueryGenerator.select(TableGenerationEntity.class);
 	private static final String TEXT = "Sample Text";
 	
 	private static EntityManagerFactory emf;
@@ -62,7 +64,7 @@ public class TableGenerationEntityTest {
 
 		// given
 		Collection<TableGenerationEntity> entities = new ArrayList<TableGenerationEntity>(100);
-		for(int i = 0; i < 100; ++i) {
+		for(int i = 0; i < 150; ++i) {
 			TableGenerationEntity entity = new TableGenerationEntity();
 			entity.setText(TEXT);
 			entities.add(entity);
