@@ -71,11 +71,11 @@ public class TableGenerationEntityTest {
 		}
 		
 		// when
-		em.getTransaction().begin();
 		for(TableGenerationEntity entityToPersist : entities) {
+			em.getTransaction().begin();
 			em.persist(entityToPersist);
+			em.getTransaction().commit();
 		}
-		em.getTransaction().commit();
 		
 		// then
 		for(TableGenerationEntity persistedEntity : entities) {
@@ -83,6 +83,4 @@ public class TableGenerationEntityTest {
 			assertThat(persistedEntity.getText()).isEqualTo(TEXT);
 		}
 	}
-	
-	
 }

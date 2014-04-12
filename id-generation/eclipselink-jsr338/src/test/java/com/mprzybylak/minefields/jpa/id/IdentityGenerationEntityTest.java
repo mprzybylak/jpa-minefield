@@ -71,11 +71,11 @@ public class IdentityGenerationEntityTest {
 		}
 		
 		// when
-		em.getTransaction().begin();
 		for(IdentityGenerationEntity entityToPersist : entities) {
+			em.getTransaction().begin();
 			em.persist(entityToPersist);
+			em.getTransaction().commit();
 		}
-		em.getTransaction().commit();
 		
 		// then
 		for(IdentityGenerationEntity persistedEntity : entities) {

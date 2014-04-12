@@ -5,7 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
+/**
+ * Example of AUTO key generation strategy
+ * @author Michal Przybylak
+ */
 @Entity
 public class AutoGenerationEntity {
 

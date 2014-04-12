@@ -71,11 +71,11 @@ public class SequenceGenerationEntityTest {
 		}
 		
 		// when
-		em.getTransaction().begin();
 		for(SequenceGenerationEntity entityToPersist : entities) {
+			em.getTransaction().begin();
 			em.persist(entityToPersist);
+			em.getTransaction().commit();
 		}
-		em.getTransaction().commit();
 		
 		// then
 		for(SequenceGenerationEntity persistedEntity : entities) {
