@@ -67,15 +67,16 @@ public class AutoGenerationEntityTest {
 		}
 		
 		// when
+		em.getTransaction().begin();
 		for(AutoGenerationEntity entityToPersist : entities) {
-			em.getTransaction().begin();
 			em.persist(entityToPersist);
-			em.getTransaction().commit();
 		}
+		em.getTransaction().commit();
 		
 		// then
 		for(AutoGenerationEntity persistedEntity : entities) {
 			assertThat(persistedEntity.getId()).isNotEqualTo(0);
+			assertThat(persistedEntity.getText()).isEqualTo(TEXT);
 		}
 	}
 	
