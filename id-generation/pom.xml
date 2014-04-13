@@ -18,6 +18,7 @@
 	
 	<modules>
 		<module>eclipselink-jsr338</module>
+		<module>hibernate-additional-generators</module>
 	</modules>
 	
 </project>
