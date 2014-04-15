@@ -17,6 +17,7 @@
 	</parent>
 	
 	<modules>
+		<module>common</module>
 		<module>eclipselink-jsr338</module>
 		<module>hibernate-additional-generators</module>
 	</modules>
