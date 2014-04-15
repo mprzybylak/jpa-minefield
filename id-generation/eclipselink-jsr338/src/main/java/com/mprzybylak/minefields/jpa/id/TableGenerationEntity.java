@@ -6,12 +6,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.TableGenerator;
 
+import com.mprzybylak.minefields.jpa.id.base.SampleEntity;
+
 /**
  * Example of Table key generation strategy
  * @author Michal Przybylak
  */
 @Entity
-public class TableGenerationEntity {
+public class TableGenerationEntity implements SampleEntity {
 
 	@Id
 	@TableGenerator(name = "TAB_GEN", 

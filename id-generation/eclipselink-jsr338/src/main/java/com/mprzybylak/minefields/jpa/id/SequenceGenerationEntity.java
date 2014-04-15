@@ -6,12 +6,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+import com.mprzybylak.minefields.jpa.id.base.SampleEntity;
+
 /**
  * Example of sequence key generation strategy
  * @author Michal Przybylak
  */
 @Entity
-public class SequenceGenerationEntity {
+public class SequenceGenerationEntity implements SampleEntity {
 
 	@Id
 	@SequenceGenerator(name="SEQ_GEN",

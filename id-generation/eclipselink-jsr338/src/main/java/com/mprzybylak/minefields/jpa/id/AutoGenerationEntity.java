@@ -5,12 +5,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.mprzybylak.minefields.jpa.id.base.SampleEntity;
+
 /**
  * Example of AUTO key generation strategy
  * @author Michal Przybylak
  */
 @Entity
-public class AutoGenerationEntity {
+public class AutoGenerationEntity implements SampleEntity {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

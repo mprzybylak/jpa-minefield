@@ -5,12 +5,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.mprzybylak.minefields.jpa.id.base.SampleEntity;
+
 /**
  * Example of identity key generation strategy
  * @author Michal Przybylak
  */
 @Entity
-public class IdentityGenerationEntity {
+public class IdentityGenerationEntity implements SampleEntity {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

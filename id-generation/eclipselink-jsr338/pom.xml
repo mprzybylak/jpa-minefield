@@ -1,23 +1,27 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	
+
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<groupId>com.mprzybylak.minefields.jpa.id-generation</groupId>
 	<artifactId>eclipse-link-jsr338</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>Eclipse Link Id generation</name>
 	<description>Examples of ID generation defined in JSR-338. Examples in Eclipselink</description>
-	
+
 	<parent>
 		<groupId>com.mprzybylak.minefields.jpa</groupId>
 		<artifactId>id-generation</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	
+
 	<dependencies>
+		<dependency>
+			<groupId>com.mprzybylak.minefields.jpa.id-generation</groupId>
+			<artifactId>common</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>eclipselink</artifactId>
@@ -27,6 +31,6 @@
 			<artifactId>derby</artifactId>
 		</dependency>
 	</dependencies>
-	
+
 </project>
  
