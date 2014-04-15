@@ -4,19 +4,17 @@
 	version="2.0">
 	<persistence-unit name="pu">
 
-		<class>Foo</class>
+		<class>com.mprzybylak.minefields.jpa.id.IncrementGeneratorEntity</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:test;create=true" />
 			<property name="javax.persistence.jdbc.user" value="APP" />
-			<property name="javax.persistence.jdbc.password" value="APP" />
-			
+			<property name="javax.persistence.jdbc.password" value="APP" />		
 			<property name="hibernate.show_sql" value="true" />
-			<!--  
-			<property name="hibernate.format_sql" value="true"/>
+		
 			<property name="hibernate.use_sql_comments" value="true"/>
-			-->
+
 			<property name="org.hibernate.type" value="TRACE"/>
 			<property name="hibernate.hbm2ddl.auto" value="create" />
 		</properties>
