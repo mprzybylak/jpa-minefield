@@ -19,6 +19,11 @@
 	
 	<dependencies>
 		<dependency>
+			<groupId>com.mprzybylak.minefields.jpa.id-generation</groupId>
+			<artifactId>common</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 		</dependency>

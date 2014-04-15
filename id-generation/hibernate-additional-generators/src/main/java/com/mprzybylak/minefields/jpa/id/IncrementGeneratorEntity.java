@@ -6,8 +6,10 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.mprzybylak.minefields.jpa.id.base.SampleEntity;
+
 @Entity
-public class IncrementGeneratorEntity {
+public class IncrementGeneratorEntity implements SampleEntity{
 
 	@Id
 	@GenericGenerator(name="hibernate-increment-generator", strategy="increment")
