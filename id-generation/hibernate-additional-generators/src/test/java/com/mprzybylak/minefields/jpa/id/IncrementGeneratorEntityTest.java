@@ -18,7 +18,6 @@ import org.junit.Test;
 public class IncrementGeneratorEntityTest {
 
 	private static final String SELECT_QUERY = "SELECT e FROM IncrementGeneratorEntity e";
-			//QueryGenerator.select(AutoGenerationEntity.class);
 	private static final String TEXT = "Sample Text";
 	
 	private static EntityManagerFactory emf;
