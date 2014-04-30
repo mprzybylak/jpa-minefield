@@ -4,9 +4,6 @@
 	version="2.0">
 	<persistence-unit name="pu">
 
-		<class>com.mprzybylak.minefields.jpa.id.IncrementGeneratorEntity</class>
-		<class>com.mprzybylak.minefields.jpa.id.UUIDGeneratorEntity</class>
-
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:test;create=true" />
