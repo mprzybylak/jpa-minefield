@@ -11,6 +11,7 @@
 
 	<modules>
 		<module>id-generation</module>
+		<module>relationships</module>
 	</modules>
 
 	<properties>
