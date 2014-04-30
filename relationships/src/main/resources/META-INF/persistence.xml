@@ -3,10 +3,13 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0">
 	<persistence-unit name="pu">
+	
+		<class>com.mprzybylak.minefields.jpa.relationships.onetoone.uni.Ball</class>
+		<class>com.mprzybylak.minefields.jpa.relationships.onetoone.uni.FootballPlayer</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:test;create=true" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:te1st;create=true" />
 			<property name="javax.persistence.jdbc.user" value="APP" />
 			<property name="javax.persistence.jdbc.password" value="APP" />		
 			
