@@ -13,7 +13,7 @@ import com.mprzybylak.minefields.jpa.id.base.SampleEntity;
  * @author Michal Przybylak
  */
 @Entity
-public class SequenceGenerationEntity implements SampleEntity {
+public class SequenceGenerationEntity implements SampleEntity<Long> {
 
 	@Id
 	@SequenceGenerator(name="SEQ_GEN",
@@ -21,11 +21,11 @@ public class SequenceGenerationEntity implements SampleEntity {
 		initialValue=0,
 		allocationSize=10)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_GEN")
-	private long id;
+	private Long id = 0L;
 	
 	private String text;
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 	

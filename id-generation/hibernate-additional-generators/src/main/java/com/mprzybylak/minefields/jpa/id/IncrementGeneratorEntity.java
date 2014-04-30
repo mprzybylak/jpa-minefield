@@ -9,16 +9,16 @@ import org.hibernate.annotations.GenericGenerator;
 import com.mprzybylak.minefields.jpa.id.base.SampleEntity;
 
 @Entity
-public class IncrementGeneratorEntity implements SampleEntity{
+public class IncrementGeneratorEntity implements SampleEntity<Long> {
 
 	@Id
 	@GenericGenerator(name="hibernate-increment-generator", strategy="increment")
 	@GeneratedValue(generator="hibernate-increment-generator")
-	private long id;
+	private Long id = 0L;
 	
 	private String text;
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 	

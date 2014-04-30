@@ -2,33 +2,35 @@ package com.mprzybylak.minefields.jpa.id;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import com.mprzybylak.minefields.jpa.id.base.SampleEntity;
 
-/**
- * Example of AUTO key generation strategy
- * @author Michal Przybylak
- */
 @Entity
-public class AutoGenerationEntity implements SampleEntity<Long> {
+public class UUIDGeneratorEntity implements SampleEntity<String> {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id = 0L;
+	@GenericGenerator(name="uuid-generator", strategy="uuid")
+	@GeneratedValue(generator="uuid-generator")
+	private String id;
 	
 	private String text;
 	
-	public Long getId() {
+	@Override
+	public String getId() {
 		return id;
 	}
-	
+
+	@Override
 	public void setText(String text) {
 		this.text = text;
 	}
-	
+
+	@Override
 	public String getText() {
 		return text;
 	}
+
 }

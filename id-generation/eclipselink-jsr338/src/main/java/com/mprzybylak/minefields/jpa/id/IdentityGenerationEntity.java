@@ -12,15 +12,15 @@ import com.mprzybylak.minefields.jpa.id.base.SampleEntity;
  * @author Michal Przybylak
  */
 @Entity
-public class IdentityGenerationEntity implements SampleEntity {
+public class IdentityGenerationEntity implements SampleEntity<Long> {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
+	private Long id = 0L;
 
 	private String text;
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 	

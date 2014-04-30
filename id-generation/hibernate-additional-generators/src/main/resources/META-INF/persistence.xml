@@ -5,6 +5,7 @@
 	<persistence-unit name="pu">
 
 		<class>com.mprzybylak.minefields.jpa.id.IncrementGeneratorEntity</class>
+		<class>com.mprzybylak.minefields.jpa.id.UUIDGeneratorEntity</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />

@@ -16,7 +16,7 @@ import org.junit.Test;
 
 import com.mprzybylak.minefields.jpa.id.common.QueryGenerator;
 
-public abstract class IdGeneratorBaseTest<T extends SampleEntity> {
+public abstract class IdGeneratorBaseTest<A, T extends SampleEntity<A>> {
 	
 	private static final String TEXT = "Sample Text";
 	
@@ -46,7 +46,7 @@ public abstract class IdGeneratorBaseTest<T extends SampleEntity> {
 		entity.setText(TEXT);
 		
 		// when
-		long oldId = entity.getId();
+		A oldId = entity.getId();
 		em.getTransaction().begin();
 		em.persist(entity);
 		em.getTransaction().commit();
@@ -55,9 +55,17 @@ public abstract class IdGeneratorBaseTest<T extends SampleEntity> {
 		T queryResult = query.getSingleResult(); 
 		
 		// then
-		assertThat(oldId).isEqualTo(0);
-		assertThat(queryResult.getId()).isNotEqualTo(0);
-		assertThat(queryResult.getText()).isEqualTo(entity.getText());
+		// sad workaround
+		if(oldId instanceof String) {
+			assertThat((String)oldId).isEqualTo("0");
+			assertThat((String)queryResult.getId()).isNotEqualTo("0");
+			assertThat(queryResult.getText()).isEqualTo(entity.getText());
+		}
+		if(oldId instanceof Long) {
+			assertThat((Long)oldId).isEqualTo(0L);
+			assertThat((Long)queryResult.getId()).isNotEqualTo(0L);
+			assertThat(queryResult.getText()).isEqualTo(entity.getText());
+		}
 	}
 	
 	@Test
