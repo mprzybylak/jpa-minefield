@@ -9,6 +9,9 @@ public class Ball {
 	@Id
 	private long id;
 
+	public Ball() {
+	}
+	
 	public Ball(long id) {
 		this.id = id;
 	}
@@ -16,5 +19,4 @@ public class Ball {
 	public long getId() {
 		return id;
 	}
-
 }

@@ -2,6 +2,7 @@ package com.mprzybylak.minefields.jpa.relationships.onetoone.uni;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -12,6 +13,9 @@ public class FootballPlayer {
 	
 	@OneToOne
 	private Ball ball;
+	
+	public FootballPlayer() {
+	}
 
 	public FootballPlayer(long id) {
 		this.id = id;
@@ -28,5 +32,4 @@ public class FootballPlayer {
 	public Ball getBall() {
 		return ball;
 	}
-
 }
