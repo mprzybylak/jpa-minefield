@@ -7,27 +7,20 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 public class UnidirectionalOneToOneTest {
 
 	private static final long BALL_ID = 10L;
 	private static final long FOOTBALL_PLAYER_ID = 100L;
-	private EntityManagerFactory emf;
-	private EntityManager em;
-
-	@Before
-	public void setUpOnce() {
-		emf = Persistence.createEntityManagerFactory("pu");
-		em = emf.createEntityManager();
-	}
 
 	@Test
 	public void shouldCreateRelation() {
 
 		// given
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernate-pu");
+		EntityManager em = emf.createEntityManager();
+
 		FootballPlayer footballPlayer = new FootballPlayer(FOOTBALL_PLAYER_ID);
 		Ball ball = new Ball(BALL_ID);
 
@@ -49,12 +42,10 @@ public class UnidirectionalOneToOneTest {
 		Ball databaseBall = databasePlayer.getBall();
 		assertThat(databaseBall).isNotNull();
 		assertThat(databaseBall.getId()).isEqualTo(BALL_ID);
-	}
 
-	@After
-	public void tearDownOnce() {
 		em.close();
 		emf.close();
 	}
+	
 
 }
