@@ -1,5 +1,7 @@
 package com.mprzybylak.minefields.jpa.relationships.manytoone.uni;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -14,6 +16,10 @@ public class Department {
 
 	public Department(long id) {
 		this.id = id;
+	}
+
+	public long getId() {
+		return id;
 	}
 	
 
