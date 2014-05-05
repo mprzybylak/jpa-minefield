@@ -10,7 +10,7 @@
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:test;create=true" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:hibernate-test;create=true" />
 			<property name="javax.persistence.jdbc.user" value="APP" />
 			<property name="javax.persistence.jdbc.password" value="APP" />		
 			
@@ -21,22 +21,20 @@
 	</persistence-unit>
 	
 	<persistence-unit name="eclipselink-pu" transaction-type="RESOURCE_LOCAL">
-	
-	<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<class>com.mprzybylak.minefields.jpa.relationships.onetoone.uni.Ball</class>
-		<class>com.mprzybylak.minefields.jpa.relationships.onetoone.uni.FootballPlayer</class>
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+			<class>com.mprzybylak.minefields.jpa.relationships.onetoone.uni.Ball</class>
+			<class>com.mprzybylak.minefields.jpa.relationships.onetoone.uni.FootballPlayer</class>
+			
+			<properties>
+				<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
+				<property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:eclipselink-test;create=true" />
+				<property name="javax.persistence.jdbc.user" value="APP" />
+				<property name="javax.persistence.jdbc.password" value="APP" />
 		
-		<properties>
-			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
-			<property name="javax.persistence.jdbc.url"
-				value="jdbc:derby:memory:test;create=true" />
-			<property name="javax.persistence.jdbc.user" value="APP" />
-			<property name="javax.persistence.jdbc.password" value="APP" />
-
-			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
-			<property name="eclipselink.logging.level.sql" value="FINE"/>
- 			<property name="eclipselink.logging.parameters" value="true"/>
-		</properties>
+				<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+				<property name="eclipselink.logging.level.sql" value="FINE"/>
+				<property name="eclipselink.logging.parameters" value="true"/>
+			</properties>
 	</persistence-unit>
 	
 </persistence>

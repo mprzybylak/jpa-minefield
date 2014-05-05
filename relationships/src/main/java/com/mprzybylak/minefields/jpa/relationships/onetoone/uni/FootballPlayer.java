@@ -12,6 +12,7 @@ public class FootballPlayer {
 	private long id;
 	
 	@OneToOne
+	@JoinColumn(unique=true)
 	private Ball ball;
 	
 	public FootballPlayer() {
