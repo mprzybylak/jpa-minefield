@@ -23,7 +23,7 @@ public class Employer {
 	 * Join collumn will override that default name
 	 */
 	@ManyToOne
-	@JoinColumn 
+	@JoinColumn(name="DEP_IDENTIFIER")
 	private Department department;
 
 	public Employer() {
