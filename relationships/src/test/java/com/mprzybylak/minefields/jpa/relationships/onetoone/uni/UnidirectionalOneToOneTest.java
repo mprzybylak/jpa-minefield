@@ -9,7 +9,6 @@ import javax.persistence.Persistence;
 import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 
-import org.fest.assertions.Assertions;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -18,6 +17,36 @@ public class UnidirectionalOneToOneTest {
 	private static final long BALL_ID = 10L;
 	private static final long FOOTBALL_PLAYER_ID = 100L;
 
+	@Test
+	public void sourceSideCouldNotHaveAnyTargetEntityInstanceAssigned() {
+
+		// given
+		EntityManagerFactory emf = Persistence
+				.createEntityManagerFactory("hibernate-pu");
+		EntityManager em = emf.createEntityManager();
+
+		FootballPlayer footballPlayer = new FootballPlayer(FOOTBALL_PLAYER_ID);
+
+		// when
+		em.getTransaction().begin();
+		em.persist(footballPlayer);
+		em.getTransaction().commit();
+
+		// then
+		TypedQuery<FootballPlayer> query = em.createQuery(
+				"SELECT e FROM FootballPlayer e", FootballPlayer.class);
+
+		FootballPlayer databasePlayer = query.getSingleResult();
+		assertThat(databasePlayer).isNotNull();
+		assertThat(databasePlayer.getId()).isEqualTo(FOOTBALL_PLAYER_ID);
+
+		Ball databaseBall = databasePlayer.getBall();
+		assertThat(databaseBall).isNull();
+
+		em.close();
+		emf.close();
+	}
+	
 	@Test
 	public void shouldCreateRelation() {
 
