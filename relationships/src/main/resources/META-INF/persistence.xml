@@ -7,6 +7,8 @@
 	
 		<class>com.mprzybylak.minefields.jpa.relationships.onetoone.uni.Ball</class>
 		<class>com.mprzybylak.minefields.jpa.relationships.onetoone.uni.FootballPlayer</class>
+		<class>com.mprzybylak.minefields.jpa.relationships.manytoone.uni.Employer</class>
+		<class>com.mprzybylak.minefields.jpa.relationships.manytoone.uni.Department</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
