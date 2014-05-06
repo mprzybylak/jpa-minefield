@@ -50,7 +50,6 @@ public class BidirectionalOneToOneTest {
 	}
 	
 	@Test
-	@Ignore
 	public void shouldSourceNotHaveRelation() {
 		
 		// given
@@ -89,37 +88,80 @@ public class BidirectionalOneToOneTest {
 	}
 	
 	@Test
-	@Ignore
 	public void shouldTargetNotHaveRelation() {
 		
 		// given
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernate-pu");
 		EntityManager em = emf.createEntityManager();
 		
+		Owner creepyDogSalker = new Owner(1L);
+		Dog homelessDog = new Dog(2L);
+		creepyDogSalker.setDog(homelessDog);
+		
 		// when
 		em.getTransaction().begin();
-		
+		em.persist(creepyDogSalker);
+		em.persist(homelessDog);
 		em.getTransaction().commit();
 		
 		// then
+		TypedQuery<Owner> ownerQuery = em.createQuery("SELECT e FROM Owner e", Owner.class);
+		TypedQuery<Dog> dogQuery = em.createQuery("SELECT e FROM Dog e", Dog.class);
+		
+		Owner ownerFromDb = ownerQuery.getSingleResult();
+		Dog dogFromDb = dogQuery.getSingleResult();
+		
+		assertThat(ownerFromDb).isNotNull();
+		assertThat(dogFromDb).isNotNull();
+
+		assertThat(ownerFromDb.getId()).isEqualTo(creepyDogSalker.getId());
+		assertThat(dogFromDb.getId()).isEqualTo(homelessDog.getId());
+		
+		assertThat(ownerFromDb.getDog()).isNotNull();
+		assertThat(ownerFromDb.getDog().getId()).isEqualTo(homelessDog.getId());
+		
+		assertThat(dogFromDb.getOwner()).isNull();
+		
 		em.close();
 		emf.close();
 	}
 	
 	@Test
-	@Ignore
 	public void shouldSourceAndTargetBeInRelation() {
 		
 		// given
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernate-pu");
 		EntityManager em = emf.createEntityManager();
 		
+		Owner owner = new Owner(1L);
+		Dog dog = new Dog(2L);
+		owner.setDog(dog);
+		dog.setOwner(owner);
+		
 		// when
 		em.getTransaction().begin();
-		
+		em.persist(owner);
+		em.persist(dog);
 		em.getTransaction().commit();
 
 		// then
+		TypedQuery<Owner> ownerQuery = em.createQuery("SELECT e FROM Owner e", Owner.class);
+		TypedQuery<Dog> dogQuery = em.createQuery("SELECT e FROM Dog e", Dog.class);
+		
+		Owner ownerFromDb = ownerQuery.getSingleResult();
+		Dog dogFromDb = dogQuery.getSingleResult();
+		
+		assertThat(ownerFromDb).isNotNull();
+		assertThat(dogFromDb).isNotNull();
+
+		assertThat(ownerFromDb.getId()).isEqualTo(owner.getId());
+		assertThat(dogFromDb.getId()).isEqualTo(dog.getId());
+		
+		assertThat(ownerFromDb.getDog()).isNotNull();
+		assertThat(ownerFromDb.getDog().getId()).isEqualTo(dog.getId());
+		assertThat(dogFromDb.getOwner()).isNotNull();
+		assertThat(dogFromDb.getOwner().getId()).isEqualTo(owner.getId());
+		
 		em.close();
 		emf.close();
 	}
