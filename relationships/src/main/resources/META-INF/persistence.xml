@@ -11,6 +11,8 @@
 		<class>com.mprzybylak.minefields.jpa.relationships.manytoone.uni.Department</class>
 		<class>com.mprzybylak.minefields.jpa.relationships.onetoone.bi.Owner</class>
 		<class>com.mprzybylak.minefields.jpa.relationships.onetoone.bi.Dog</class>
+		<class>com.mprzybylak.minefields.jpa.relationships.onetomany.bi.Team</class>
+		<class>com.mprzybylak.minefields.jpa.relationships.onetomany.bi.Member</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
@@ -33,6 +35,8 @@
 		<class>com.mprzybylak.minefields.jpa.relationships.manytoone.uni.Department</class>
 		<class>com.mprzybylak.minefields.jpa.relationships.onetoone.bi.Owner</class>
 		<class>com.mprzybylak.minefields.jpa.relationships.onetoone.bi.Dog</class>
+		<class>com.mprzybylak.minefields.jpa.relationships.onetomany.bi.Team</class>
+		<class>com.mprzybylak.minefields.jpa.relationships.onetomany.bi.Member</class>
 			
 			<properties>
 				<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
