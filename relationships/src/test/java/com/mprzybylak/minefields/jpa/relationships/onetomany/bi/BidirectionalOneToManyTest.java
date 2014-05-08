@@ -63,5 +63,80 @@ public class BidirectionalOneToManyTest {
 		em.close();
 		emf.close();
 	}
+	
+	@Test
+	public void shouldAllowToSourceWithoutTarget() {
+		// given
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernate-pu");
+		EntityManager em = emf.createEntityManager();
+		
+		// when
+		em.getTransaction().begin();
+		em.getTransaction().commit();
+		
+		// then
+		TypedQuery<Team> teamQuery = em.createQuery("SELECT e FROM Team e", Team.class);
+		TypedQuery<Member> memberQuery = em.createQuery("SELECT e FROM Member e", Member.class);
 
+		em.close();
+		emf.close();
+	}
+	
+	@Test
+	public void shouldAllowToTargetWithoutSource() {
+		// given
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernate-pu");
+		EntityManager em = emf.createEntityManager();
+		
+		// when
+		em.getTransaction().begin();
+		em.getTransaction().commit();
+		
+		// then
+		TypedQuery<Team> teamQuery = em.createQuery("SELECT e FROM Team e", Team.class);
+		TypedQuery<Member> memberQuery = em.createQuery("SELECT e FROM Member e", Member.class);
+
+		em.close();
+		emf.close();
+	}
+
+	
+	// Illegal?
+	@Test
+	public void shouldTargetToPointOtherSorce(){
+		// given
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernate-pu");
+		EntityManager em = emf.createEntityManager();
+		
+		// when
+		em.getTransaction().begin();
+		em.getTransaction().commit();
+		
+		// then
+		TypedQuery<Team> teamQuery = em.createQuery("SELECT e FROM Team e", Team.class);
+		TypedQuery<Member> memberQuery = em.createQuery("SELECT e FROM Member e", Member.class);
+
+		em.close();
+		emf.close();
+	}
+	
+	// Illegal?
+	@Test
+	public void shouldAllowSourceToPointOtherTarget() {
+		// given
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernate-pu");
+		EntityManager em = emf.createEntityManager();
+		
+		// when
+		em.getTransaction().begin();
+		em.getTransaction().commit();
+		
+		// then
+		TypedQuery<Team> teamQuery = em.createQuery("SELECT e FROM Team e", Team.class);
+		TypedQuery<Member> memberQuery = em.createQuery("SELECT e FROM Member e", Member.class);
+
+		em.close();
+		emf.close();
+	}
+	
 }
