@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -13,7 +14,19 @@ public class Owner {
 	@GeneratedValue(strategy=GenerationType.TABLE)
 	private long id;
 	
+	/*
+	 * Default name for join column will be
+	 * 
+	 * DOG_ID
+	 * 
+	 * because:
+	 * 1. field in Owner class is called dog
+	 * 2. field that contains identifier in Dog class is called id
+	 * 
+	 * Join collumn will override that default name
+	 */
 	@OneToOne
+	@JoinColumn(name="DOGGY_ID")
 	private Dog dog;
 
 	public Owner() {
