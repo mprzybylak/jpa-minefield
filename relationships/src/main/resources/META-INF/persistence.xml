@@ -26,8 +26,13 @@
 	
 	<persistence-unit name="eclipselink-pu" transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-			<class>com.mprzybylak.minefields.jpa.relationships.onetoone.uni.Ball</class>
-			<class>com.mprzybylak.minefields.jpa.relationships.onetoone.uni.FootballPlayer</class>
+		
+		<class>com.mprzybylak.minefields.jpa.relationships.onetoone.uni.Ball</class>
+		<class>com.mprzybylak.minefields.jpa.relationships.onetoone.uni.FootballPlayer</class>
+		<class>com.mprzybylak.minefields.jpa.relationships.manytoone.uni.Employer</class>
+		<class>com.mprzybylak.minefields.jpa.relationships.manytoone.uni.Department</class>
+		<class>com.mprzybylak.minefields.jpa.relationships.onetoone.bi.Owner</class>
+		<class>com.mprzybylak.minefields.jpa.relationships.onetoone.bi.Dog</class>
 			
 			<properties>
 				<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
