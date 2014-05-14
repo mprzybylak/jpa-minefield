@@ -1,4 +1,4 @@
-package com.mprzybylak.minefields.jpa.relationships.manytoone.uni;
+package com.mprzybylak.minefields.jpa.relationships.manytoone.bi;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

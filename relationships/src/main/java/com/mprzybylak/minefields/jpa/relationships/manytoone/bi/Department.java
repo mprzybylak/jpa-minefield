@@ -1,6 +1,5 @@
-package com.mprzybylak.minefields.jpa.relationships.manytoone.uni;
+package com.mprzybylak.minefields.jpa.relationships.manytoone.bi;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -8,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+/**
+ * Department is inverse side of relation
+ */
 @Entity
 public class Department {
 	
