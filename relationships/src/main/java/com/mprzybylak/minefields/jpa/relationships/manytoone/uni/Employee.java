@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
  * Employer is owner of relationship
  */
 @Entity
-public class Employer {
+public class Employee {
 
 	@Id
 	private long id;
@@ -29,10 +29,10 @@ public class Employer {
 	@JoinColumn(name="DEP_IDENTIFIER")
 	private Department department;
 
-	public Employer() {
+	public Employee() {
 	}
 	
-	public Employer(long id) {
+	public Employee(long id) {
 		this.id = id;
 	}
 

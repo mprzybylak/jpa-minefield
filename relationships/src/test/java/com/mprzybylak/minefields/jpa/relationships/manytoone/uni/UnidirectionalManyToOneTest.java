@@ -21,7 +21,7 @@ public class UnidirectionalManyToOneTest {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernate-pu");
 		EntityManager em = emf.createEntityManager();
 		
-		Employer unemployed = new Employer(1L);
+		Employee unemployed = new Employee(1L);
 		
 		// when
 		em.getTransaction().begin();
@@ -29,11 +29,35 @@ public class UnidirectionalManyToOneTest {
 		em.getTransaction().commit();
 		
 		// then
-		TypedQuery<Employer> query = em.createQuery("SELECT e FROM Employer e", Employer.class);
-		Employer employerFromDb = query.getSingleResult();
+		TypedQuery<Employee> query = em.createQuery("SELECT e FROM Employee e", Employee.class);
+		Employee employerFromDb = query.getSingleResult();
 		
 		assertThat(employerFromDb.getId()).isEqualTo(unemployed.getId());
 		assertThat(employerFromDb.getDepartment()).isNull();
+		
+		em.close();
+		emf.close();
+	}
+	
+	@Test
+	public void shouldAllowToHaveZeroSources() {
+		// given
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernate-pu");
+		EntityManager em = emf.createEntityManager();
+		
+		Department department = new Department(1L);
+		
+		// when
+		em.getTransaction().begin();
+		em.persist(department);
+		em.getTransaction().commit();
+		
+		// then
+		TypedQuery<Department> query = em.createQuery("SELECT e FROM Department e", Department.class);
+		Department departmentFromDb = query.getSingleResult();
+		
+		assertThat(departmentFromDb.getId()).isEqualTo(department.getId());
+		assertThat(departmentFromDb.getEmployees()).isEmpty();
 		
 		em.close();
 		emf.close();
@@ -46,23 +70,32 @@ public class UnidirectionalManyToOneTest {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernate-pu");
 		EntityManager em = emf.createEntityManager();
 		
-		Employer employer = new Employer(1L);
+		Employee employee = new Employee(1L);
 		Department department = new Department(2L);
-		employer.setDepartment(department);
+		employee.setDepartment(department);
+		department.addEmployee(employee);
 		
 		// when
 		em.getTransaction().begin();
-		em.persist(employer);
+		em.persist(employee);
 		em.persist(department);
 		em.getTransaction().commit();
 		
 		// then
-		TypedQuery<Employer> query = em.createQuery("SELECT e FROM Employer e", Employer.class);
-		Employer employerFromDb = query.getSingleResult();
+		TypedQuery<Employee> employeeQuery = em.createQuery("SELECT e FROM Employee e", Employee.class);
+		Employee employerFromDb = employeeQuery.getSingleResult();
 		
-		assertThat(employerFromDb.getId()).isEqualTo(employer.getId());
+		TypedQuery<Department> departmentQuery = em.createQuery("SELECT e FROM Department e", Department.class);
+		Department departmentFromDb = departmentQuery.getSingleResult();
+
+		assertThat(employerFromDb.getId()).isEqualTo(employee.getId());
 		assertThat(employerFromDb.getDepartment()).isNotNull();
 		assertThat(employerFromDb.getDepartment().getId()).isEqualTo(department.getId());
+
+		assertThat(departmentFromDb.getId()).isEqualTo(department.getId());
+		assertThat(departmentFromDb.getEmployees()).hasSize(1);
+		assertThat(departmentFromDb.getEmployees().iterator().next()).isNotNull();
+		assertThat(departmentFromDb.getEmployees().iterator().next().getId()).isNotNull();
 		
 		em.close();
 		emf.close();
@@ -75,15 +108,19 @@ public class UnidirectionalManyToOneTest {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernate-pu");
 		EntityManager em = emf.createEntityManager();
 		
-		Employer firstEmployer = new Employer(1L);
-		Employer secondEmployer = new Employer(2L);
-		Employer thirdEmployer = new Employer(3L);
+		Employee firstEmployer = new Employee(1L);
+		Employee secondEmployer = new Employee(2L);
+		Employee thirdEmployer = new Employee(3L);
 		
 		Department department = new Department(10L);
 		
 		firstEmployer.setDepartment(department);
 		secondEmployer.setDepartment(department);
 		thirdEmployer.setDepartment(department);
+		
+		department.addEmployee(firstEmployer);
+		department.addEmployee(secondEmployer);
+		department.addEmployee(thirdEmployer);
 		
 		// when
 		em.getTransaction().begin();
@@ -94,13 +131,13 @@ public class UnidirectionalManyToOneTest {
 		em.getTransaction().commit();
 		
 		// then
-		TypedQuery<Employer> query = em.createQuery("SELECT e FROM Employer e", Employer.class);
-		List<Employer> employers = query.getResultList();
-		Iterator<Employer> it = employers.iterator();
+		TypedQuery<Employee> query = em.createQuery("SELECT e FROM Employee e", Employee.class);
+		List<Employee> employers = query.getResultList();
+		Iterator<Employee> it = employers.iterator();
 		
-		Employer firstEmployerFromDb = it.next();
-		Employer secondEmployerFromDb = it.next();
-		Employer thirdEmployerFromDb = it.next();
+		Employee firstEmployerFromDb = it.next();
+		Employee secondEmployerFromDb = it.next();
+		Employee thirdEmployerFromDb = it.next();
 		
 		assertThat(firstEmployerFromDb.getId()).isEqualTo(firstEmployer.getId());
 		assertThat(firstEmployerFromDb.getDepartment()).isNotNull();
@@ -113,6 +150,21 @@ public class UnidirectionalManyToOneTest {
 		assertThat(thirdEmployerFromDb.getId()).isEqualTo(thirdEmployer.getId());
 		assertThat(thirdEmployerFromDb.getDepartment()).isNotNull();
 		assertThat(thirdEmployerFromDb.getDepartment().getId()).isEqualTo(department.getId());
+				
+		TypedQuery<Department> departmentQuery = em.createQuery("SELECT e FROM Department e", Department.class);
+		Department departmentFromDb = departmentQuery.getSingleResult();
+		
+		assertThat(departmentFromDb.getId()).isEqualTo(department.getId());
+		assertThat(departmentFromDb.getEmployees()).hasSize(3);
+		
+		Iterator<Employee> empIt = departmentFromDb.getEmployees().iterator();
+		Employee firstEmployeeFromDbDepartment = empIt.next();
+		Employee secondEmployeeFromDbDepartment = empIt.next();
+		Employee thirdEmployeeFromDbDepartment = empIt.next();
+		
+		assertThat(firstEmployeeFromDbDepartment.getId()).isEqualTo(firstEmployer.getId());
+		assertThat(secondEmployeeFromDbDepartment.getId()).isEqualTo(secondEmployer.getId());
+		assertThat(thirdEmployeeFromDbDepartment.getId()).isEqualTo(thirdEmployer.getId());
 		
 		em.close();
 		emf.close();

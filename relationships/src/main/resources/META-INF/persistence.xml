@@ -7,7 +7,7 @@
 	
 		<class>com.mprzybylak.minefields.jpa.relationships.onetoone.uni.Ball</class>
 		<class>com.mprzybylak.minefields.jpa.relationships.onetoone.uni.FootballPlayer</class>
-		<class>com.mprzybylak.minefields.jpa.relationships.manytoone.uni.Employer</class>
+		<class>com.mprzybylak.minefields.jpa.relationships.manytoone.uni.Employee</class>
 		<class>com.mprzybylak.minefields.jpa.relationships.manytoone.uni.Department</class>
 		<class>com.mprzybylak.minefields.jpa.relationships.onetoone.bi.Owner</class>
 		<class>com.mprzybylak.minefields.jpa.relationships.onetoone.bi.Dog</class>
