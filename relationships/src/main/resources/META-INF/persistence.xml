@@ -15,7 +15,11 @@
 		<class>com.mprzybylak.minefields.jpa.relationships.onetomany.bi.Member</class>
 		<class>com.mprzybylak.minefields.jpa.relationships.manytomany.bi.Movie</class>
 		<class>com.mprzybylak.minefields.jpa.relationships.manytomany.bi.Actor</class>
-
+		<class>com.mprzybylak.minefields.jpa.relationships.onetomany.uni.Book</class>
+		<class>com.mprzybylak.minefields.jpa.relationships.onetomany.uni.Reader</class>
+		<class>com.mprzybylak.minefields.jpa.relationships.manytomany.uni.RssChannel</class>
+		<class>com.mprzybylak.minefields.jpa.relationships.manytomany.uni.NewsReader</class>
+		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:hibernate-test;create=true" />
@@ -41,7 +45,10 @@
 		<class>com.mprzybylak.minefields.jpa.relationships.onetomany.bi.Member</class>
 		<class>com.mprzybylak.minefields.jpa.relationships.manytomany.bi.Movie</class>
 		<class>com.mprzybylak.minefields.jpa.relationships.manytomany.bi.Actor</class>
-		
+		<class>com.mprzybylak.minefields.jpa.relationships.onetomany.uni.Book</class>
+		<class>com.mprzybylak.minefields.jpa.relationships.onetomany.uni.Reader</class>
+		<class>com.mprzybylak.minefields.jpa.relationships.manytomany.uni.RssChannel</class>
+		<class>com.mprzybylak.minefields.jpa.relationships.manytomany.uni.NewsReader</class>
 			
 			<properties>
 				<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
