@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -13,7 +14,10 @@ public class Reader {
 	@Id
 	private long id;
 	
-	@OneToMany
+	
+	@OneToMany(
+			fetch=FetchType.LAZY // eager fetch by default but it can be changed by "fetch" parameter
+			)
 	private Collection<Book> books = new ArrayList<>();
 	
 	public Reader() {

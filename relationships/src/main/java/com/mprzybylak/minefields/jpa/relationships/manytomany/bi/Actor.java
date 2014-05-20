@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
@@ -16,7 +17,10 @@ public class Actor {
 	@Id
 	private long id;
 	
-	@ManyToMany(mappedBy="actors")
+	
+	@ManyToMany(mappedBy="actors", 
+			fetch=FetchType.LAZY // Lazy fetch by default but it can be changed by "fetch" parameter
+			)
 	private Collection<Movie> movies = new ArrayList<>();
 	
 	public Actor() {

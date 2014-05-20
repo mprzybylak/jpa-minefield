@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
@@ -13,7 +14,9 @@ public class NewsReader {
 	@Id
 	private long id;
 	
-	@ManyToMany
+	@ManyToMany(
+			fetch=FetchType.LAZY // lazy fetch by default but it can be changed by "fetch" parameter
+			)
 	private Collection<RssChannel> rssChannels = new ArrayList<>();
 	
 	public NewsReader() {

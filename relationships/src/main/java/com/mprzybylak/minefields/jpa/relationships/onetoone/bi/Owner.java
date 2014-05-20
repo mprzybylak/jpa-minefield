@@ -1,6 +1,7 @@
 package com.mprzybylak.minefields.jpa.relationships.onetoone.bi;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,7 +14,7 @@ public class Owner {
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE)
 	private long id;
-	
+
 	/*
 	 * Default name for join column will be
 	 * 
@@ -25,8 +26,10 @@ public class Owner {
 	 * 
 	 * Join collumn will override that default name
 	 */
-	@OneToOne
 	@JoinColumn(name="DOGGY_ID")
+	@OneToOne(
+			fetch=FetchType.EAGER // eager fetch by default but it can be changed by "fetch" parameter
+			)
 	private Dog dog;
 
 	public Owner() {

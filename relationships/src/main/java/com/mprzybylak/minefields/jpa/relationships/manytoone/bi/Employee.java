@@ -1,6 +1,7 @@
 package com.mprzybylak.minefields.jpa.relationships.manytoone.bi;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,6 +15,7 @@ public class Employee {
 	@Id
 	private long id;
 
+	
 	/*
 	 * Default name for join column will be
 	 * 
@@ -25,8 +27,10 @@ public class Employee {
 	 * 
 	 * Join collumn will override that default name
 	 */
-	@ManyToOne
 	@JoinColumn(name="DEP_IDENTIFIER")
+	@ManyToOne(
+			fetch=FetchType.EAGER // eager fetch by default but it can be changed by "fetch" parameter
+			)
 	private Department department;
 
 	public Employee() {

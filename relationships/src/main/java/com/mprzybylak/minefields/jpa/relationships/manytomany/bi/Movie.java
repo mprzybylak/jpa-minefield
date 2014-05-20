@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -19,6 +20,7 @@ public class Movie {
 	@Id
 	private long id;
 
+	
 	/**
 	 * JoinTable annotation is on the owning side (check if true)
 	 * Default name of join table = "<OwningSideEntityName>_<InverseSideEntityName>, so
@@ -34,10 +36,12 @@ public class Movie {
 	 * default names
 	 * 
 	 */
-	@ManyToMany
 	@JoinTable(name = "MOVIE_ACCTOR_JOIN_TABLE", 
 			joinColumns = @JoinColumn(name = "MOVIE_JOIN_COLUMN"), 
 			inverseJoinColumns = @JoinColumn(name = "ACTORS_JOIN_COLUMN"))
+	@ManyToMany(
+			fetch=FetchType.LAZY // Lazy fetch by default by default but it can be changed by "fetch" parameter
+			)
 	private Collection<Actor> actors = new ArrayList<>();
 
 	public Movie() {

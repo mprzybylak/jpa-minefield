@@ -1,6 +1,7 @@
 package com.mprzybylak.minefields.jpa.relationships.onetoone.bi;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,7 +14,11 @@ public class Dog {
 	@GeneratedValue(strategy=GenerationType.TABLE)
 	private long id;
 	
-	@OneToOne(mappedBy="dog")
+	
+	@OneToOne(
+			mappedBy="dog",
+			fetch=FetchType.EAGER // eager fetch by default but it can be changed by "fetch" parameter
+			)
 	private Owner owner;
 	
 	public Dog() {
