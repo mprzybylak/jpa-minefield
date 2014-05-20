@@ -2,6 +2,8 @@
 
 ## Bidirectional
 
+From logical point of view - one of entities is owning side, but from database schema point of view it doesn't matter, because either way there will be join table.
+
 ### Entities 
 
 Actor Entity
@@ -20,7 +22,7 @@ Movie Entity
 @Entity
 public class Actor {
   @Id private long id;
-  @ManyToMany	private Collection<Movie> movies = new ArrayList<>();
+  @ManyToMany(mappedBy="actors") private Collection<Movie> movies = new ArrayList<>();
 }
 ```
 
