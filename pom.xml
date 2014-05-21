@@ -12,6 +12,7 @@
 	<modules>
 		<module>id-generation</module>
 		<module>relationships</module>
+		<module>collection-mapping</module>
 	</modules>
 
 	<properties>
