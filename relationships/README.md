@@ -1,3 +1,13 @@
+# Relationships
+
+## Fetch type
+
+Relation inside entity can be loaded in two flavours:
+* **Eager** - related entity will be loaded with entity. This is default behavior for single-valued relationships
+* **Lazy** - related entity will ne loaded when accessed. This is default behavior for collection-valued relationships - but this is only hint for JPA provider which can be ignored *[source?]*
+
+We can force JPA to use fetch type that we prefer. We need to use `fetch` parameter inside relationship annotation. This parameter can be set to `FetchType.LAZY` or `FetchType.EAGER`
+
 # Many to many relationship
 
 ## Bidirectional
